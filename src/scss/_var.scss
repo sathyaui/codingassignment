@@ -1,9 +1,17 @@
 :root {
     --html-font-size: 100%;
-    --base-spacing: 20px;
+    --base-spacing: 1rem;
 
-    --font-size-small: 12px;
-    --font-size-regular: 14px;
+    --half-spacing: calc(var(--base-spacing) / 2);
+    --quarter-spacing: calc(var(--base-spacing) / 4);
+    --unit-spacing: calc(var(--base-spacing) / 8);
 
-    --body-text-color: red;
+    --font-size-small: 0.625rem;
+    --font-size-regular: 0.875rem;
+
+    --body-text-color: #828282;
+
+    --header-bg: #ff6600;
+
+    --font-family: Verdana, Geneva, sans-serif;
 }
