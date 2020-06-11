@@ -1,4 +1,4 @@
-import { FETCH_FEEDS } from '../helpers/constants';
+import { FETCH_FEEDS, CURRENT_PAGE_NUMBER } from '../helpers/constants';
 
 function handleResponse(response) {
 	if (response.ok) {
@@ -10,10 +10,13 @@ function handleResponse(response) {
 	}
 }
 
-export function fetchFeeds() {
+export function fetchFeeds(pageNumber) {
 	return dispatch => {
-		return fetch("http://hn.algolia.com/api/v1/search")
+		return fetch(`http://hn.algolia.com/api/v1/search?page=${pageNumber}`)
 			.then(res => handleResponse(res))
-			.then(res => dispatch({ type: FETCH_FEEDS, data: res }))
+			.then(res => {
+				dispatch({ type: FETCH_FEEDS, data: res });
+				dispatch({ type:CURRENT_PAGE_NUMBER, pageNumber });
+			})
 	}
 }

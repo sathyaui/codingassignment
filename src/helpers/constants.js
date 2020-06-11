@@ -1,1 +1,3 @@
 export const FETCH_FEEDS = "FETCH_FEEDS";
+
+export const CURRENT_PAGE_NUMBER = "CURRENT_PAGE_NUMBER";

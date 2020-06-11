@@ -26,6 +26,7 @@ body {
 	&__feed {
 		&__table {
 			width: 100%;
+			margin-bottom: var(--quarter-spacing);
 			&__th {
 				background-color: var(--header-bg);
 				text-align: left;
@@ -49,6 +50,8 @@ body {
 	&__navigation {
 		justify-content: flex-end;
 		align-items: center;
+		padding-top: var(--quarter-spacing);
+		padding-bottom: var(--base-spacing);
 		&, &__button {
 			color: var(--header-bg);
 			font-weight: bold;
@@ -57,6 +60,9 @@ body {
 			background-color: transparent;
 			border: 0;
 			cursor: pointer;
+			&:disabled {
+				color: var(--disabled);
+			}
 			&:hover {
 				color: var(--hover-color);
 			}

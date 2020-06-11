@@ -11,8 +11,9 @@ const App = (props) => {
 	const [isLoading, setLoading] = useState(false);
 	const { fetchFeeds } = props;
 	useEffect(() => {
+		console.log(location.hash)
 		async function loadData() {
-			await fetchFeeds();
+			await fetchFeeds(0);
 			setLoading(true);
 		}
 		loadData();

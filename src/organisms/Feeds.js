@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import * as moment from 'moment';
 
+import Navigation from './Navigation';
+
 const Feeds = (props) => {
-	const { data } = props;
-	if (data.length < 0) return <div>Loading...</div>
+	const { data, pageNumber } = props;
 	return <div className="xt__feed">
 		<table className="xt__feed__table">
 			<thead>
@@ -17,7 +18,7 @@ const Feeds = (props) => {
 				</tr>
 			</thead>
 			<tbody>
-				{data.map(hits => hits.hits.map((item) => {
+				{data[pageNumber].hits.map((item) => {
 					const { num_comments, objectID, points, title, url, author, created_at } = item;
 					return <tr key={objectID} className="xt__feed__table__row">
 						<td className="xt__feed__table__td">{num_comments && num_comments || 0}</td>
@@ -25,20 +26,17 @@ const Feeds = (props) => {
 						<td className="xt__feed__table__td">^</td>
 						<td className="xt__feed__table__td">{title} {url} by {author} {moment(created_at).startOf('hour').fromNow()}</td>
 					</tr>
-				}))}
+				})}
 			</tbody>
 		</table>
-		<div className="xt__navigation xt__flex">
-			<button className="xt__navigation__button">Previous</button>
-			|
-			<button className="xt__navigation__button">Next</button>
-		</div>
+		<Navigation />
 	</div>
 }
 
 const mapStateToProps = (state) => {
 	return {
-		data: state.feeds
+		data: state.feeds,
+		pageNumber: state.pageNumber
 	}
 }
 
