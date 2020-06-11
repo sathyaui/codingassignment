@@ -8,7 +8,10 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: [
+    require.resolve('babel-polyfill'),
+    "./src/index.js",
+  ],
   output: {
     publicPath: "/",
     path: path.join(__dirname, "build"),
