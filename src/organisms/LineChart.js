@@ -1,51 +1,42 @@
 import React from 'react';
 import {
-	ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid
+	ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Label
 } from 'recharts';
+
+import { connect } from 'react-redux';
 
 const CHART_HEIGHT = 300;
 
-const data = [
-	{
-		name: 'Page A', uv: 4000
-	},
-	{
-		name: 'Page B', uv: 3000
-	},
-	{
-		name: 'Page C', uv: 2000
-	},
-	{
-		name: 'Page D', uv: 2780
-	},
-	{
-		name: 'Page E', uv: 1890
-	},
-	{
-		name: 'Page F', uv: 2390
-	},
-	{
-		name: 'Page G', uv: 3490
-	},
-];
+const labelStyle = {
+	fontWeight: "bold",
+	fontSize: 16
+}
 
-
-const LineGraph = () => {
+const LineGraph = (props) => {
+	const { chartData } = props;
 	return <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
 		<LineChart
 			width={500}
 			height={CHART_HEIGHT}
-			data={data}
+			data={chartData}
 			margin={{
-				top: 5, right: 20, left: -20, bottom: 5,
+				top: 5, right: 10, left: 10, bottom: 30,
 			}}
 		>
 			<CartesianGrid />
-			<XAxis tickLine={false} dataKey="name" />
-			<YAxis tickLine={false} />
-			<Line dataKey="uv" stroke="#82ca9d" />
+			<XAxis tickLine={false} axisLine={false} dataKey="name">
+				<Label value="ID" style={labelStyle} offset={0} position="bottom" />
+			</XAxis>
+			<YAxis axisLine={false} label={{ value: "Votes", angle: -90, position: "left", ...labelStyle }} />
+			<Line dataKey="value" stroke="blue" />
 		</LineChart>
 	</ResponsiveContainer>
 }
 
-export default LineGraph;
+const mapStateToProps = (state) => {
+	return {
+		chartData: state.chartData
+	}
+}
+
+export default connect(mapStateToProps, {})(LineGraph);

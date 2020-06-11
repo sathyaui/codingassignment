@@ -11,9 +11,14 @@ const App = (props) => {
 	const [isLoading, setLoading] = useState(false);
 	const { fetchFeeds } = props;
 	useEffect(() => {
-		console.log(location.hash)
+		let pageNumber = 0;
+		let searchParam = +location.search.split("?page=").pop();
+		
+		if(searchParam) {
+			pageNumber = searchParam
+		}
 		async function loadData() {
-			await fetchFeeds(0);
+			await fetchFeeds(pageNumber);
 			setLoading(true);
 		}
 		loadData();
