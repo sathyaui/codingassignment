@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --mode development --hot",
+    "dev:open": "webpack-dev-server --mode development --hot --open",
     "build": "NODE_ENV='production' webpack --mode=production"
   },
   "repository": {
